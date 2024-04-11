@@ -14,12 +14,20 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _currentIndex = 0;
 
-  List<Widget> screens = const [HomePage(), SearchPage(), ChatPage(), ProfilePage()];
+  List<Widget> screens = [
+    const HomePage(),
+    const SearchPage(),
+    const ChatPage(),
+    const ProfilePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_currentIndex],
+      body: SafeArea(
+          child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: screens[_currentIndex])),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
@@ -35,11 +43,15 @@ class _NavBarState extends State<NavBar> {
           });
         },
         items: const [
-          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "Busca", icon: Icon(Icons.search)),
           BottomNavigationBarItem(
-              label: "Chat", icon: Icon(Icons.chat_bubble_outline_rounded)),
-          BottomNavigationBarItem(label: "Perfil", icon: Icon(Icons.person)),
+              label: "Home", icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              label: "Busca", icon: Icon(Icons.search)),
+          BottomNavigationBarItem(
+              label: "Chat",
+              icon: Icon(Icons.chat_bubble_outline_rounded)),
+          BottomNavigationBarItem(
+              label: "Perfil", icon: Icon(Icons.person)),
         ],
       ),
     );
